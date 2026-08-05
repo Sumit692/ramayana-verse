@@ -139,7 +139,7 @@ export default function Hero({ onBeginJourney }: HeroProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden flex flex-col justify-between"
+      className="relative w-full h-screen overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32"
       style={{
         background: 'linear-gradient(to bottom, #030303 0%, #0d0a0d 50%, #171015 100%)',
       }}
