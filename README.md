@@ -154,7 +154,7 @@ Explore
 
 ## Database
 
-- PostgreSQL
+- MySQL
 
 ---
 
