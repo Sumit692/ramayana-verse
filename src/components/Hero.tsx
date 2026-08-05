@@ -2,8 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Bell, ArrowDown, Volume2, VolumeX, Globe } from 'lucide-react';
-import { useAppLanguage } from '@/components/Providers';
+import { Bell, ArrowDown, Volume2, VolumeX, Globe, Sun, Moon } from 'lucide-react';
+import { useAppLanguage, useAppTheme } from '@/components/Providers';
 import { getTranslation } from '@/data/translations';
 
 interface HeroProps {
@@ -17,6 +17,7 @@ export default function Hero({ onBeginJourney }: HeroProps) {
   const [mounted, setMounted] = useState(false);
   const [bellRinging, setBellRinging] = useState(false);
   const { language, setLanguage } = useAppLanguage();
+  const { theme, toggleTheme } = useAppTheme();
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   const manualRingBell = () => {
@@ -374,6 +375,24 @@ export default function Hero({ onBeginJourney }: HeroProps) {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Theme Selector Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2.5 rounded-full glass border-white/10 hover:border-gold/40 transition duration-300 group flex items-center gap-2 text-white/70 hover:text-gold cursor-pointer"
+            title={language === 'Hindi' ? 'थीम बदलें' : 'Toggle Theme'}
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-4 h-4 text-gold" />
+            ) : (
+              <Moon className="w-4 h-4 text-gold" />
+            )}
+            <span className="text-[10px] font-semibold uppercase tracking-wider hidden sm:inline">
+              {theme === 'dark' 
+                ? (language === 'Hindi' ? 'प्रकाश' : 'Light') 
+                : (language === 'Hindi' ? 'अंधकार' : 'Dark')}
+            </span>
+          </button>
           
           {/* Enter Game Button in Navbar */}
           <a

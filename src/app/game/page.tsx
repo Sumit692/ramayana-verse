@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { quizzes } from '@/data/ramayana';
-import { useUserProgress, useAppLanguage } from '@/components/Providers';
+import { useUserProgress, useAppLanguage, useAppTheme } from '@/components/Providers';
 import { getTranslatedQuizzes, getTranslation, speakText } from '@/data/translations';
 import {
   Trophy,
@@ -22,12 +22,15 @@ import {
   ArrowLeft,
   BookOpen,
   ChevronRight,
-  Globe
+  Globe,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export default function GamePage() {
   const { xp, streak, addXp, resetProgress } = useUserProgress();
   const { language, setLanguage } = useAppLanguage();
+  const { theme, toggleTheme } = useAppTheme();
 
   // Navigation states
   const [gameState, setGameState] = useState<'intro' | 'active'>('intro');
@@ -377,6 +380,20 @@ export default function GamePage() {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Theme Selector Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full border border-white/10 bg-white/5 hover:border-gold/40 hover:bg-white/10 transition duration-300 text-white/80 cursor-pointer flex items-center justify-center gap-1.5 text-xs font-semibold uppercase tracking-wider"
+            title={language === 'Hindi' ? 'थीम बदलें' : 'Toggle Theme'}
+          >
+            {theme === 'dark' ? <Sun className="w-4 h-4 text-gold" /> : <Moon className="w-4 h-4 text-gold" />}
+            <span className="hidden xs:inline">
+              {theme === 'dark' 
+                ? (language === 'Hindi' ? 'प्रकाश' : 'Light') 
+                : (language === 'Hindi' ? 'अंधकार' : 'Dark')}
+            </span>
+          </button>
 
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
