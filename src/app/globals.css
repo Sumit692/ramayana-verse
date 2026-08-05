@@ -1,26 +1,166 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Premium Dark Mode Colors (Default) */
+  --background: #050505;
+  --foreground: #fcfcfc;
+  --primary-gold: #d4af37;
+  --primary-saffron: #f27b21;
+  --primary-ivory: #fdfbf7;
+  --temple-stone: #242426;
+  --emerald: #059669;
+  --royal-blue: #1d4ed8;
+  --subtle-crimson: #991b1b;
+  
+  --card-bg: rgba(15, 15, 17, 0.7);
+  --card-border: rgba(212, 175, 55, 0.15);
+  --glow-color: rgba(242, 123, 33, 0.2);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.light-theme {
+  --background: #fdfbf7; /* Ivory base */
+  --foreground: #141416;
+  --primary-gold: #b48a04;
+  --primary-saffron: #dd5e03;
+  --primary-ivory: #050505;
+  --temple-stone: #eae7e0;
+  --emerald: #047857;
+  --royal-blue: #1e40af;
+  --subtle-crimson: #b91c1c;
+
+  --card-bg: rgba(250, 248, 244, 0.85);
+  --card-border: rgba(180, 138, 4, 0.25);
+  --glow-color: rgba(221, 94, 3, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --color-gold: var(--primary-gold);
+  --color-saffron: var(--primary-saffron);
+  --color-ivory: var(--primary-ivory);
+  --color-temple: var(--temple-stone);
+}
+
+/* Base styling */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Outfit', 'Inter', sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Glassmorphism Classes */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+}
+
+.glass-premium {
+  background: linear-gradient(135deg, rgba(20, 20, 25, 0.8) 0%, rgba(10, 10, 12, 0.6) 100%);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .glass-premium {
+  background: linear-gradient(135deg, rgba(255, 254, 250, 0.9) 0%, rgba(245, 242, 235, 0.8) 100%);
+  border: 1px solid rgba(180, 138, 4, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(180, 138, 4, 0.08);
+}
+
+/* Glow effects */
+.glow-gold {
+  box-shadow: 0 0 25px var(--glow-color);
+}
+
+.glow-text {
+  text-shadow: 0 0 15px var(--glow-color);
+}
+
+/* Volumetric lighting & Aurora Backgrounds */
+.aurora {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(242, 123, 33, 0.08) 0%, rgba(212, 175, 55, 0.04) 40%, transparent 70%);
+  animation: aurora-spin 40s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gold);
+  border-radius: 3px;
+}
+
+/* Custom Animations */
+@keyframes aurora-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% {
+    d: path("M 0 40 Q 150 20 300 40 T 600 40 T 900 40 T 1200 40 L 1200 100 L 0 100 Z");
+  }
+  50% {
+    d: path("M 0 40 Q 150 60 300 40 T 600 40 T 900 60 T 1200 40 L 1200 100 L 0 100 Z");
+  }
+}
+
+.animate-river {
+  animation: wave 8s ease-in-out infinite;
+}
+
+/* 3D Tilt Card Container */
+.tilt-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+.tilt-card-inner {
+  transform: translateZ(50px);
 }

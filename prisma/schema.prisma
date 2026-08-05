@@ -1,0 +1,47 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model UserProgress {
+  id          Int      @id @default(autoincrement())
+  deviceId    String   @unique
+  username    String   @default("Arya")
+  xp          Int      @default(0)
+  streak      Int      @default(1)
+  lastActive  DateTime @default(now())
+  kidsMode    Boolean  @default(false)
+  currentKand String   @default("Bal Kand")
+  language    String   @default("English")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Bookmark {
+  id          Int      @id @default(autoincrement())
+  type        String   // "verse" | "quote" | "lesson" | "character" | "location"
+  referenceId String   // unique string referencing the item in our ramayana data
+  title       String
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+}
+
+model QuizAttempt {
+  id        Int      @id @default(autoincrement())
+  quizType  String   // "character" | "timeline" | "battle" | "location" | "weapon"
+  score     Int
+  maxScore  Int
+  createdAt DateTime @default(now())
+}
+
+model AiMessage {
+  id        Int      @id @default(autoincrement())
+  role      String   // "user" | "assistant"
+  content   String   @db.Text
+  sources   String?  @db.Text // serialized sources or lessons
+  createdAt DateTime @default(now())
+}
