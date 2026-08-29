@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { journeyLocations, JourneyLocation } from '@/data/ramayana';
 import { MapPin, Info, Users, Sparkles, BookOpen, Navigation, ArrowRight, X, Volume2, VolumeX } from 'lucide-react';
 import { useUserProgress, useAppLanguage } from '@/components/Providers';
-import { getTranslatedLocations, getTranslation, speakText } from '@/data/translations';
+import { getTranslatedLocations, getTranslation, speakText, cancelSpeech } from '@/data/translations';
 
 export default function JourneyMap() {
   const [selectedLocId, setSelectedLocId] = useState<string>('ayodhya');
@@ -49,7 +49,7 @@ export default function JourneyMap() {
 
   const toggleNarration = (loc: JourneyLocation) => {
     if (isSpeaking) {
-      if (typeof window !== 'undefined') window.speechSynthesis.cancel();
+      cancelSpeech();
       setIsSpeaking(false);
       return;
     }
@@ -66,7 +66,7 @@ export default function JourneyMap() {
   // Cancel speaking when switching sites or closing details
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.speechSynthesis.cancel();
+      cancelSpeech();
       setIsSpeaking(false);
     }
   }, [selectedLocId, showDeepDetail]);

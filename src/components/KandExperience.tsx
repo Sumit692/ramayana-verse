@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { kands, Kand, characters } from '@/data/ramayana';
-import { getTranslatedKands, getTranslation, speakText } from '@/data/translations';
+import { getTranslatedKands, getTranslation, speakText, cancelSpeech } from '@/data/translations';
 import { useKidsMode, useUserProgress, useAppLanguage } from '@/components/Providers';
 import { Volume2, VolumeX, CheckCircle, BookOpen, Quote, Sparkles, Award } from 'lucide-react';
 
@@ -69,7 +69,7 @@ export default function KandExperience() {
     if (typeof window === 'undefined') return;
 
     if (isSpeaking) {
-      window.speechSynthesis.cancel();
+      cancelSpeech();
       setIsSpeaking(false);
       return;
     }
@@ -89,7 +89,7 @@ export default function KandExperience() {
   // Cancel speaking on Kand swap
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.speechSynthesis.cancel();
+      cancelSpeech();
       setIsSpeaking(false);
     }
   }, [activeKandIndex]);

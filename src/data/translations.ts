@@ -1210,6 +1210,67 @@ export function getTranslatedQuizzes(lang: Language): Quiz[] {
 // NATIVE TEXT-TO-SPEECH (TTS) AUDIO GUIDE
 // ----------------------------------------------------
 let activeUtterance: any = null;
+let sentenceQueue: string[] = [];
+let currentSentenceIndex = 0;
+let isSpeakingActive = false;
+let currentOnEndCallback: (() => void) | null = null;
+let currentOnErrorCallback: (() => void) | null = null;
+let activeLangCode = 'en-US';
+let activeVoice: any = null;
+
+function speakNextSentence() {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return;
+
+  if (!isSpeakingActive || currentSentenceIndex >= sentenceQueue.length) {
+    // Finished speaking all sentences
+    isSpeakingActive = false;
+    activeUtterance = null;
+    if (currentOnEndCallback) currentOnEndCallback();
+    return;
+  }
+
+  const text = sentenceQueue[currentSentenceIndex];
+  const utterance = new SpeechSynthesisUtterance(text);
+  activeUtterance = utterance;
+
+  utterance.lang = activeLangCode;
+  utterance.rate = activeLangCode.startsWith('hi') ? 0.85 : 0.95; // slightly slower for Devnagari clarity
+  utterance.volume = 1.0;
+  utterance.pitch = 1.0;
+
+  if (activeVoice) {
+    utterance.voice = activeVoice;
+  }
+
+  utterance.onend = () => {
+    // Only proceed if the user hasn't explicitly cancelled the session
+    if (isSpeakingActive) {
+      currentSentenceIndex++;
+      speakNextSentence();
+    }
+  };
+
+  utterance.onerror = (event) => {
+    // 'interrupted' is fired when cancelSpeech is called, which we handle gracefully
+    if (event.error !== 'interrupted') {
+      console.error("Speech synthesis sentence error:", event);
+    }
+    isSpeakingActive = false;
+    activeUtterance = null;
+    if (currentOnErrorCallback) currentOnErrorCallback();
+  };
+
+  window.speechSynthesis.speak(utterance);
+  
+  // Extra safety: resume in case the browser gets stuck in a paused state
+  window.speechSynthesis.resume();
+}
+
+export function cancelSpeech() {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  isSpeakingActive = false;
+  window.speechSynthesis.cancel();
+}
 
 export function speakText(text: string, lang: Language, onEnd?: () => void, onError?: () => void) {
   if (typeof window === 'undefined' || !window.speechSynthesis) return;
@@ -1224,47 +1285,39 @@ export function speakText(text: string, lang: Language, onEnd?: () => void, onEr
     return;
   }
 
-  // Crucial Chrome Workaround: Resume before cancel to clear any frozen queue state
+  // Cancel any active speech synthesis and resume to clear frozen queues
   window.speechSynthesis.resume();
   window.speechSynthesis.cancel();
 
-  // Create new utterance and assign to module-level variable to prevent GC
-  const utterance = new SpeechSynthesisUtterance(text);
-  activeUtterance = utterance;
-
+  // Reset state values
   const isHindiOrSanskrit = lang === 'Hindi' || lang === 'Sanskrit';
-  utterance.lang = isHindiOrSanskrit ? 'hi-IN' : 'en-US';
-  utterance.rate = isHindiOrSanskrit ? 0.85 : 0.95; // slightly slower for better temple ambiance clarity
+  activeLangCode = isHindiOrSanskrit ? 'hi-IN' : 'en-US';
+  currentOnEndCallback = onEnd || null;
+  currentOnErrorCallback = onError || null;
 
-  utterance.onend = () => {
-    activeUtterance = null;
+  // Split into sentences safely using Hindi danda and English full stops/punctuation markers
+  sentenceQueue = text.split(/[।\.!\?]+/).map(s => s.trim()).filter(s => s.length > 1);
+  if (sentenceQueue.length === 0) {
     if (onEnd) onEnd();
-  };
+    return;
+  }
 
-  utterance.onerror = (event) => {
-    console.error("Speech synthesis error:", event);
-    activeUtterance = null;
-    if (onError) onError();
-  };
+  currentSentenceIndex = 0;
+  isSpeakingActive = true;
 
   // Find voice: prioritize hi-IN for Hindi, then hi, then anything containing hi/hindi/हिन्दी
-  let voice = null;
   if (isHindiOrSanskrit) {
-    voice = voices.find(v => v.lang.toLowerCase() === 'hi-in') ||
-            voices.find(v => v.lang.toLowerCase().startsWith('hi')) ||
-            voices.find(v => v.name.toLowerCase().includes('hindi')) ||
-            voices.find(v => v.name.includes('हिन्दी'));
+    activeVoice = voices.find(v => v.lang.toLowerCase() === 'hi-in') ||
+                  voices.find(v => v.lang.toLowerCase().startsWith('hi')) ||
+                  voices.find(v => v.name.toLowerCase().includes('hindi')) ||
+                  voices.find(v => v.name.includes('हिन्दी')) || null;
   } else {
-    voice = voices.find(v => v.lang.toLowerCase() === 'en-us') ||
-            voices.find(v => v.lang.toLowerCase().startsWith('en')) ||
-            voices.find(v => v.name.toLowerCase().includes('english'));
+    activeVoice = voices.find(v => v.lang.toLowerCase() === 'en-us') ||
+                  voices.find(v => v.lang.toLowerCase().startsWith('en')) ||
+                  voices.find(v => v.name.toLowerCase().includes('english')) || null;
   }
 
-  if (voice) {
-    utterance.voice = voice;
-  }
-
-  window.speechSynthesis.speak(utterance);
+  speakNextSentence();
 }
 
 export function getTranslatedVersions(lang: Language): VersionDetail[] {

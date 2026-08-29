@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { timelineEvents, TimelineEvent } from '@/data/ramayana';
 import { Calendar, MapPin, Users, Award, BookOpen, X, ChevronRight, ChevronLeft, Volume2, VolumeX } from 'lucide-react';
 import { useUserProgress, useAppLanguage } from '@/components/Providers';
-import { getTranslatedTimeline, getTranslation, speakText } from '@/data/translations';
+import { getTranslatedTimeline, getTranslation, speakText, cancelSpeech } from '@/data/translations';
 
 export default function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,7 +44,7 @@ export default function Timeline() {
 
   const toggleNarration = (evt: TimelineEvent) => {
     if (isSpeaking) {
-      if (typeof window !== 'undefined') window.speechSynthesis.cancel();
+      cancelSpeech();
       setIsSpeaking(false);
       return;
     }
@@ -59,7 +59,7 @@ export default function Timeline() {
   };
 
   const closeModal = () => {
-    if (typeof window !== 'undefined') window.speechSynthesis.cancel();
+    cancelSpeech();
     setIsSpeaking(false);
     setSelectedEvent(null);
   };
@@ -67,7 +67,7 @@ export default function Timeline() {
   // Cancel speaking when switching events
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.speechSynthesis.cancel();
+      cancelSpeech();
       setIsSpeaking(false);
     }
   }, [selectedEvent]);
