@@ -1214,6 +1214,16 @@ let activeUtterance: any = null;
 export function speakText(text: string, lang: Language, onEnd?: () => void, onError?: () => void) {
   if (typeof window === 'undefined' || !window.speechSynthesis) return;
 
+  // Wait for voices to load if the list is empty (common in Chrome/Safari on first load)
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length === 0) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.onvoiceschanged = null; // Unsubscribe to avoid double triggers
+      speakText(text, lang, onEnd, onError);
+    };
+    return;
+  }
+
   // Crucial Chrome Workaround: Resume before cancel to clear any frozen queue state
   window.speechSynthesis.resume();
   window.speechSynthesis.cancel();
@@ -1222,8 +1232,9 @@ export function speakText(text: string, lang: Language, onEnd?: () => void, onEr
   const utterance = new SpeechSynthesisUtterance(text);
   activeUtterance = utterance;
 
-  utterance.lang = lang === 'Hindi' ? 'hi-IN' : 'en-US';
-  utterance.rate = lang === 'Hindi' ? 0.88 : 0.95; // slightly slower for better temple ambiance clarity
+  const isHindiOrSanskrit = lang === 'Hindi' || lang === 'Sanskrit';
+  utterance.lang = isHindiOrSanskrit ? 'hi-IN' : 'en-US';
+  utterance.rate = isHindiOrSanskrit ? 0.85 : 0.95; // slightly slower for better temple ambiance clarity
 
   utterance.onend = () => {
     activeUtterance = null;
@@ -1236,11 +1247,19 @@ export function speakText(text: string, lang: Language, onEnd?: () => void, onEr
     if (onError) onError();
   };
 
-  // Fetch native system voices
-  const voices = window.speechSynthesis.getVoices();
-  
-  // Try to find a native Hindi or English voice
-  const voice = voices.find(v => v.lang.toLowerCase().startsWith(lang === 'Hindi' ? 'hi' : 'en'));
+  // Find voice: prioritize hi-IN for Hindi, then hi, then anything containing hi/hindi/हिन्दी
+  let voice = null;
+  if (isHindiOrSanskrit) {
+    voice = voices.find(v => v.lang.toLowerCase() === 'hi-in') ||
+            voices.find(v => v.lang.toLowerCase().startsWith('hi')) ||
+            voices.find(v => v.name.toLowerCase().includes('hindi')) ||
+            voices.find(v => v.name.includes('हिन्दी'));
+  } else {
+    voice = voices.find(v => v.lang.toLowerCase() === 'en-us') ||
+            voices.find(v => v.lang.toLowerCase().startsWith('en')) ||
+            voices.find(v => v.name.toLowerCase().includes('english'));
+  }
+
   if (voice) {
     utterance.voice = voice;
   }
