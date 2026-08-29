@@ -9,7 +9,7 @@ import { Volume2, VolumeX, CheckCircle, BookOpen, Quote, Sparkles, Award } from 
 
 export default function KandExperience() {
   const [activeKandIndex, setActiveKandIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState<'summary' | 'verses' | 'lessons'>('summary');
+  const [activeTab, setActiveTab] = useState<'summary' | 'verses' | 'themes' | 'lessons'>('summary');
   const [isSpeaking, setIsSpeaking] = useState(false);
   const { isKidsMode } = useKidsMode();
   const { completedKands, completeKand, xp } = useUserProgress();
@@ -223,6 +223,7 @@ export default function KandExperience() {
                 {[
                   { id: 'summary', label: language === 'Hindi' ? 'कथा सारांश' : 'Chronicle' },
                   { id: 'verses', label: language === 'Hindi' ? 'पावन श्लोक' : 'Sacred Verses' },
+                  { id: 'themes', label: language === 'Hindi' ? 'दर्शन / Themes' : 'Themes' },
                   { id: 'lessons', label: language === 'Hindi' ? 'जीवन की सीख' : 'Lessons for Life' },
                 ].map((tab) => (
                   <button
@@ -302,6 +303,30 @@ export default function KandExperience() {
                           </p>
                         </div>
                       ))}
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'themes' && (
+                    <motion.div
+                      key="themes"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="space-y-4 font-inter"
+                    >
+                      <div className="space-y-4">
+                        {currentKand.themes?.map((theme, idx) => (
+                          <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/5">
+                            <h6 className="text-sm font-bold text-gold mb-1.5 flex items-center gap-2">
+                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-saffron" />
+                              {theme.title}
+                            </h6>
+                            <p className="text-xs md:text-sm text-white/70 leading-relaxed">
+                              {theme.description}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
 

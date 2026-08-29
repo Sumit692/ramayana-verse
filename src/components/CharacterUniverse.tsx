@@ -170,6 +170,18 @@ export default function CharacterUniverse() {
                 {isKidsMode ? getKidsDescription(activeChar) : activeChar.description}
               </p>
 
+              {/* Biography Section */}
+              {activeChar.biography && (
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 mb-6">
+                  <h4 className="text-[10px] uppercase font-bold text-white/40 tracking-wider mb-2.5 flex items-center gap-1.5">
+                    <Info className="w-3.5 h-3.5 text-gold" /> {language === 'Hindi' ? 'जीवन यात्रा और विस्तृत कथा' : 'Biography & Narrative Journey'}
+                  </h4>
+                  <p className="text-xs md:text-sm text-white/70 leading-relaxed font-inter max-h-[160px] overflow-y-auto pr-2">
+                    {activeChar.biography}
+                  </p>
+                </div>
+              )}
+
               {/* Weapons & Powers grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-white/5 p-4 rounded-xl border border-white/5">

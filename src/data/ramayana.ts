@@ -5,6 +5,11 @@ export interface Verse {
   reference: string;
 }
 
+export interface KandTheme {
+  title: string;
+  description: string;
+}
+
 export interface Kand {
   id: string;
   name: string;
@@ -18,6 +23,7 @@ export interface Kand {
   keyEvents: string[];
   verses: Verse[];
   lessons: string[];
+  themes?: KandTheme[];
 }
 
 export interface Character {
@@ -41,6 +47,7 @@ export interface Character {
   allies: string[];
   enemies: string[];
   aestheticColor: string;
+  biography?: string;
 }
 
 export interface TimelineEvent {
@@ -119,18 +126,18 @@ export const kands: Kand[] = [
     name: 'Bal Kand',
     title: 'The Book of Youth',
     translation: 'Childhood & Early Adventures',
-    description: 'The birth of Lord Rama, his childhood, education, slaying of demons, and marriage to Sita.',
-    summary: 'Bal Kand sets the divine stage for the incarnation of Vishnu as Rama. It narrates the sacrifices performed by King Dasharatha of Ayodhya, the birth of the four princes, Rama\'s tutelage under Sage Vishwamitra, the slaying of Tataka, the liberation of Ahalya, and the breaking of Shiva\'s bow to win Sita\'s hand in marriage.',
-    moral: 'Righteousness (Dharma) begins with self-discipline, respect for gurus, and protecting the innocent.',
+    description: `The birth of Lord Rama, his childhood, education, slaying of demons, and marriage to Sita.`,
+    summary: `Bal Kand sets the divine stage for the incarnation of Lord Vishnu as Rama. In the city of Ayodhya, King Dasharatha, desiring heirs, conducts the sacred Putrakameshti Yajna under the guidance of Sage Rishyasringa. The fire deity grants divine payasam, which the king distributes to his queens—Kausalya, Kaikeyi, and Sumitra. Consequently, Rama, Bharata, Lakshmana, and Shatrughna are born. The princes grow up embodying distinct aspects of virtue and capability. In their youth, Sage Vishwamitra arrives in Ayodhya requesting Rama's protection to defend his holy rituals against the attacks of forest demons led by Tataka, Subahu, and Maricha. Reluctantly, King Dasharatha allows Rama and Lakshmana to accompany the sage. Vishwamitra trains the young princes in warfare and divine weaponry. Rama successfully slays the demoness Tataka and destroys the demonic hordes. During this journey, Rama also liberates Ahalya, who had been turned to stone by a curse, restoring her to life. Finally, Vishwamitra leads the princes to Mithila, ruled by King Janaka, where a Swayamvar is organized for Princess Sita. The challenge is to lift and string the ancient, heavy Pinaka bow of Lord Shiva. While numerous kings fail, Rama lifts the bow with ease, strings it, and breaks it in two, winning Sita's hand in marriage. The families unite, and the four brothers are married to Sita and her cousins in Mithila, returning to Ayodhya amidst grand celebrations.`,
+    moral: `Righteousness (Dharma) begins with self-discipline, respect for gurus, and protecting the innocent.`,
     themeColor: 'from-amber-600 via-orange-500 to-yellow-400',
     bgImage: 'linear-gradient(to bottom, #d97706, #f97316, #facc15)',
     keyEvents: [
-      'Putrakameshti Yajna by King Dasharatha',
-      'Birth of Rama, Lakshmana, Bharata, and Shatrughna',
-      'Grooming by Sage Vishwamitra',
-      'Slaying of demoness Tataka',
-      'Liberation of Ahalya',
-      'Sita Swayamvar: Breaking of Pinaka Bow'
+      `Putrakameshti Yajna by King Dasharatha`,
+      `Birth of Rama, Lakshmana, Bharata, and Shatrughna`,
+      `Grooming by Sage Vishwamitra`,
+      `Slaying of demoness Tataka`,
+      `Liberation of Ahalya`,
+      `Sita Swayamvar: Breaking of Pinaka Bow`
     ],
     verses: [
       {
@@ -141,9 +148,23 @@ export const kands: Kand[] = [
       }
     ],
     lessons: [
-      'Humility in learning: Princes leaving the palace to study under Sage Vishwamitra.',
-      'Courage: Confronting fearsome demons at a young age to protect spiritual practices.',
-      'Destiny and Grace: The divine union of Rama and Sita through spiritual excellence.'
+      `Humility in learning: Princes leaving the palace to study under Sage Vishwamitra.`,
+      `Courage: Confronting fearsome demons at a young age to protect spiritual practices.`,
+      `Destiny and Grace: The divine union of Rama and Sita through spiritual excellence.`
+    ],
+    themes: [
+      {
+        title: `Dharma & Moral Duty`,
+        description: `Emphasizes character building and respect for Gurus. The young princes leaving royal luxuries to protect the sage's sacrifices shows that the security and spiritual health of society override personal comfort.`
+      },
+      {
+        title: `Spiritual Symbolism`,
+        description: `Shiva's heavy bow represents the human ego. Slaying Tataka represents conquering primal fears, and breaking the bow symbolizes shattering the ego to unite with the divine intellect (Sita).`
+      },
+      {
+        title: `Relationships & Loyalty`,
+        description: `Establishes the early sibling bond of the four brothers. Lakshmana's voluntary commitment to serve Rama becomes the foundation of familial unity and selflessness.`
+      }
     ]
   },
   {
@@ -151,18 +172,18 @@ export const kands: Kand[] = [
     name: 'Ayodhya Kand',
     title: 'The Book of Ayodhya',
     translation: 'Duty, Exile & Sorrow',
-    description: 'Preparations for Rama\'s coronation, Kaikeyi\'s demands, Dasharatha\'s grief, and Rama\'s exile to the forest.',
-    summary: 'Ayodhya Kand focuses on human relationships, duty, and tragic conflicts. King Dasharatha decides to crown Rama, but Queen Kaikeyi, influenced by her maid Manthara, demands two boons: Rama\'s exile for 14 years and Bharata\'s coronation. Rama accepts his father\'s word without anger, leaving for the forest with Sita and Lakshmana.',
-    moral: 'Loyalty to promises (Pitra Dharma) and maintaining composure (Stithaprajna) in the face of sudden adversity.',
+    description: `Preparations for Rama's coronation, Kaikeyi's demands, Dasharatha's grief, and Rama's exile to the forest.`,
+    summary: `Ayodhya Kand focuses on human relationships, duty, and tragic conflicts. King Dasharatha, feeling age catching up to him, decides to crown Rama as the crown prince. The citizens of Ayodhya rejoice. However, Queen Kaikeyi's maid, Manthara, instills jealousy and fear in the queen's mind, convincing her that Rama's coronation would lead to the ruin of her own son, Bharata. Kaikeyi retreats to the anger chamber and demands two boons that Dasharatha had promised her years ago on a battlefield: that Bharata be crowned king, and that Rama be exiled to the Dandakaranya forest for 14 years. Bound by his word, a heartbroken Dasharatha yields. Rama accepts the decree with absolute serenity, placing his father's honor and truth above the crown. Despite Rama's pleas to stay behind, Sita and Lakshmana insist on accompanying him into exile. The trio departs Ayodhya, plunging the city into deep mourning. Unable to bear the grief of separation from his beloved son, King Dasharatha passes away. Bharata, who was away in Kekeya, returns to Ayodhya and is horrified by his mother's actions. He rejects the crown, performs the last rites of his father, and leads a delegation to the forest to bring Rama back. They meet at Chitrakoot, where Bharata pleads with Rama to return. Rama refuses, maintaining that they must fulfill their father's promise. Bharata accepts Rama's wooden sandals (Padukas) to place on the throne, swearing to rule as a mere regent from Nandigram until Rama's return.`,
+    moral: `Loyalty to promises (Pitra Dharma) and maintaining composure (Stithaprajna) in the face of sudden adversity.`,
     themeColor: 'from-orange-700 via-red-600 to-amber-600',
     bgImage: 'linear-gradient(to bottom, #c2410c, #dc2626, #d97706)',
     keyEvents: [
-      'Announcement of Rama\'s Coronation',
-      'Manthara\'s instigation of Kaikeyi',
-      'Kaikeyi\'s demands of two boons',
-      'King Dasharatha\'s heartbreak and death',
-      'Rama, Sita, and Lakshmana depart Ayodhya',
-      'Bharata\'s refusal of the throne and search for Rama at Chitrakoot'
+      `Announcement of Rama's Coronation`,
+      `Manthara's instigation of Kaikeyi`,
+      `Kaikeyi's demands of two boons`,
+      `King Dasharatha's heartbreak and death`,
+      `Rama, Sita, and Lakshmana depart Ayodhya`,
+      `Bharata's refusal of the throne and search for Rama at Chitrakoot`
     ],
     verses: [
       {
@@ -173,9 +194,23 @@ export const kands: Kand[] = [
       }
     ],
     lessons: [
-      'Composure: Rama reacts to exile with the same serenity as he did to coronation.',
-      'Selfless Duty: Lakshmana and Sita leaving luxury to stand by Rama.',
-      'Integrity: Bharata rejecting an unearned kingdom and keeping Rama\'s wooden sandals (Padukas) on the throne.'
+      `Composure: Rama reacts to exile with the same serenity as he did to coronation.`,
+      `Selfless Duty: Lakshmana and Sita leaving luxury to stand by Rama.`,
+      `Integrity: Bharata rejecting an unearned kingdom and keeping Rama's wooden sandals (Padukas) on the throne.`
+    ],
+    themes: [
+      {
+        title: `Duty over Desires`,
+        description: `Exemplifies Pitra Dharma (duty to parents) and Satyavrata (commitment to truth). Rama willingly exchanges a royal crown for a simple hermit's garb to protect his father's word.`
+      },
+      {
+        title: `The Danger of Toxic Influence`,
+        description: `Manthara's manipulation of Queen Kaikeyi shows how easily a clean, loving mind can be poisoned by malicious counseling, leading to family breakdown and societal sorrow.`
+      },
+      {
+        title: `Detachment & Leadership`,
+        description: `Bharata's refusal to take the crown and his decision to rule using Rama's Padukas illustrates that leadership is a service, not a property to be seized.`
+      }
     ]
   },
   {
@@ -183,18 +218,18 @@ export const kands: Kand[] = [
     name: 'Aranya Kand',
     title: 'The Book of the Forest',
     translation: 'Forest Hermitages & Abduction',
-    description: 'Life in the forest, encounters with sages, demon attacks, and the abduction of Sita by Ravana.',
-    summary: 'Aranya Kand chronicles the forest years. Sages seek protection from demons. Surpanakha, sister of Ravana, attempts to harm Sita and is mutilated by Lakshmana. Seeking revenge, Ravana uses the demon Maricha as a golden deer to lure Rama and Lakshmana away, then abducts Sita. Jatayu fights valiantly but falls.',
-    moral: 'Every illusion (the Golden Deer) has a cost, and standing up against evil (Jatayu\'s fight) is a duty regardless of the outcome.',
+    description: `Life in the forest, encounters with sages, demon attacks, and the abduction of Sita by Ravana.`,
+    summary: `Aranya Kand chronicles the forest years of Rama, Sita, and Lakshmana as they move deeper into the Dandakaranya forest. They visit various holy hermitages of sages like Atri, Anasuya, and Agastya, who bless them and seek their protection against the terror of demons (Rakshasas). Rama promises to rid the forest of evil forces. They settle in a beautiful valley called Panchavati on the banks of the Goavari River. One day, Surpanakha, a demoness and the sister of the demon king Ravana, encounters Rama and becomes infatuated with him. When Rama and Lakshmana reject her advances, she attempts to attack Sita. In response, Lakshmana cuts off her nose and ears. Disfigured and humiliated, she flees to her brothers Khara and Dushana, who attack Rama with an army of fourteen thousand demons. Rama single-handedly destroys the entire force. Surpanakha then rushes to Lanka and instigates Ravana, describing Sita's incomparable beauty and urging him to abduct her. Ravana plans a plot. He forces the demon Maricha to disguise himself as an exquisite golden deer. Sita, captivated by the deer, begs Rama to capture it. Rama pursues the deer, and when struck by Rama's arrow, Maricha calls out for help in Rama's voice. Tricked by the cry, Sita sends a reluctant Lakshmana to help. Leaving Sita alone, Lakshmana draws a protective line (Lakshmana Rekha) around the hut. Ravana arrives disguised as a mendicant, coaxes Sita to cross the line to offer alms, and abducts her. The vulture king Jatayu fights Ravana to rescue Sita but is fatally wounded. Ravana carries Sita to Lanka and imprisons her in the Ashok Vatika. Rama and Lakshmana return, find the hut empty, and begin a desperate search.`,
+    moral: `Every illusion (the Golden Deer) has a cost, and standing up against evil (Jatayu's fight) is a duty regardless of the outcome.`,
     themeColor: 'from-emerald-800 via-green-700 to-teal-800',
     bgImage: 'linear-gradient(to bottom, #064e3b, #15803d, #115e59)',
     keyEvents: [
-      'Settling in Panchavati forest',
-      'Surpanakha\'s advances and mutilation',
-      'Slaying of Khara and Dushana\'s army',
-      'The Golden Deer (Maricha\'s disguise)',
-      'Sita\'s Abduction by Ravana',
-      'Jatayu\'s heroic battle and sacrifice'
+      `Settling in Panchavati forest`,
+      `Surpanakha's advances and mutilation`,
+      `Slaying of Khara and Dushana's army`,
+      `The Golden Deer (Maricha's disguise)`,
+      `Sita's Abduction by Ravana`,
+      `Jatayu's heroic battle and sacrifice`
     ],
     verses: [
       {
@@ -205,9 +240,23 @@ export const kands: Kand[] = [
       }
     ],
     lessons: [
-      'Resisting temptation: Mindful awareness against superficial desires (represented by the golden deer).',
-      'Sacrifice: Jatayu sacrificing his life to save another.',
-      'Devotion: Shabari\'s pure love and patience waiting for Lord Rama.'
+      `Resisting temptation: Mindful awareness against superficial desires (represented by the golden deer).`,
+      `Sacrifice: Jatayu sacrificing his life to save another.`,
+      `Devotion: Shabari's pure love and patience waiting for Lord Rama.`
+    ],
+    themes: [
+      {
+        title: `Illusion and Desire (Maya)`,
+        description: `The golden deer represents Maya (illusion) and materialistic temptation. Chasing superficial desires distracts the mind from inner peace, causing separation from the divine.`
+      },
+      {
+        title: `Valor in Defeat`,
+        description: `Jatayu's battle represents standing up for the vulnerable even when victory is impossible. Rama honors Jatayu by performing his final rites, showing that righteousness is valued by intent, not success.`
+      },
+      {
+        title: `Devotion and Inclusivity`,
+        description: `Rama's meeting with Shabari, an elderly tribal woman who waited decades for him, breaks all social and caste boundaries. Eating her half-eaten tasted berries shows that God values simple, pure devotion above all.`
+      }
     ]
   },
   {
@@ -215,63 +264,91 @@ export const kands: Kand[] = [
     name: 'Kishkindha Kand',
     title: 'The Book of Kishkindha',
     translation: 'Alliance of the Monkeys',
-    description: 'Rama meets Hanuman, forms an alliance with Sugriva, slays Bali, and prepares the search party.',
-    summary: 'Set in the monkey kingdom of Kishkindha, Rama meets Hanuman, the epitome of devotion. Rama helps Sugriva regain his kingdom from his tyrannical brother Bali. In return, Sugriva mobilizes the Vanara forces. Sampaati (Jatayu\'s brother) confirms Sita is in Lanka, across the southern ocean.',
-    moral: 'True friendship is mutually supportive, and latent strength (Hanuman\'s power) is awakened through spiritual reminders.',
+    description: `Rama meets Hanuman, forms an alliance with Sugriva, slays Bali, and prepares the search party.`,
+    summary: `Set in the rugged monkey kingdom of Kishkindha, this Kand narrates the formation of the divine alliance. Rama and Lakshmana, searching for Sita, arrive at the Pampa Lake and head towards Rishyamukha Hill. Sugriva, an exiled monkey prince fearing his powerful brother Bali, spots them and sends his loyal minister, Hanuman, to investigate. Hanuman approaches in disguise, but upon speaking with Rama, recognizes his divine lord and surrenders in devotion. Hanuman introduces the brothers to Sugriva. Rama and Sugriva strike an alliance over fire. Rama promises to help Sugriva regain his kingdom and free his wife Ruma from the tyrannical Bali. In return, Sugriva promises to use his vast monkey forces to locate Sita. Rama slays Bali from behind a tree, an act necessary because Bali possessed a boon allowing him to absorb half the strength of anyone who faced him directly. Sugriva is crowned king of Kishkindha. However, Sugriva becomes distracted by royal pleasures, forgetting his promise. Lakshmana marches to the capital in anger, prompting Sugriva to apologize and mobilize the Vanara army. Sugriva sends search parties in all four directions. The southern party, led by Angada, Hanuman, and the wise bear king Jambavan, reaches the shore of the southern ocean. Feeling despondent about crossing the vast waters, they meet Sampati, the elder brother of Jatayu, who informs them that Sita is held in Lanka, 100 yojanas across the sea. Jambavan then reminds a silent Hanuman of his divine lineage and dormant powers, preparing him for the epic leap.`,
+    moral: `True friendship is mutually supportive, and latent strength (Hanuman's power) is awakened through spiritual reminders.`,
     themeColor: 'from-amber-700 via-yellow-600 to-orange-700',
     bgImage: 'linear-gradient(to bottom, #b45309, #ca8a04, #c2410c)',
     keyEvents: [
-      'Rama\'s meet with Hanuman at Rishyamukha Hill',
-      'Alliance with Sugriva',
-      'Slaying of Bali by Rama',
-      'Sugriva\'s coronation and delayed promise',
-      'Sending searching groups to the four directions',
-      'Jambavan awakening Hanuman\'s forgotten powers'
+      `Rama's meet with Hanuman at Rishyamukha Hill`,
+      `Alliance with Sugriva`,
+      `Slaying of Bali by Rama`,
+      `Sugriva's coronation and delayed promise`,
+      `Sending searching groups to the four directions`,
+      `Jambavan awakening Hanuman's forgotten powers`
     ],
     verses: [
       {
         sanskrit: 'उत्साहो बलवानार्य नास्त्युत्साहात्परं बलम्। सोत्साहस्य च लोकेषु न किञ्चिदपि दुर्लभम्॥',
-        transliteration: 'utsāho balavānārya nāstyutsāhātparaṁ balam | sotsāhasya ca lokeṣu na kiñcidapi durlabham ||',
+        transliteration: 'utsāho balavānārya nāstyutsāhātparaṁ balam | sotsāhasya ca lokeṣu no kiñcidapi durlabham ||',
         translation: 'Enthusiasm is indeed powerful, O Noble One! There is no force superior to enthusiasm. To an enthusiastic person, nothing is impossible in this world.',
         reference: 'Valmiki Ramayana, 4.1.121'
       }
     ],
     lessons: [
-      'Loyalty and Gratitude: Keeping promises made during tough times.',
-      'Self-discovery: We all have dormant potential (like Hanuman) that requires divine guidance to activate.',
-      'Justice: Balancing individual errors with larger collective duties.'
+      `Loyalty and Gratitude: Keeping promises made during tough times.`,
+      `Self-discovery: We all have dormant potential (like Hanuman) that requires divine guidance to activate.`,
+      `Justice: Balancing individual errors with larger collective duties.`
+    ],
+    themes: [
+      {
+        title: `Strategic Friendship`,
+        description: `Examines the ethics of friendship (Mitra Dharma). Sugriva and Rama help each other overcome personal losses, demonstrating that mutual support is crucial in battling large obstacles.`
+      },
+      {
+        title: `Awakening Potential`,
+        description: `Jambavan's role in reminding Hanuman of his powers shows the importance of mentorship. Often, individuals possess immense potential but need the guidance of a wise elder to discover it.`
+      },
+      {
+        title: `The Restless Mind`,
+        description: `The Vanaras (literally forest dwellers) symbolize the restless, active human senses. Directed by Hanuman (Prana/Breath) and aligned with Rama (Soul), these wild forces become channelized for a divine purpose.`
+      }
     ]
   },
   {
     id: 'sundara-kand',
     name: 'Sundara Kand',
     title: 'The Beautiful Book',
-    translation: 'Hanuman\'s Devotion & Triumph',
-    description: 'Hanuman\'s leap across the ocean, discovery of Sita in Ashoka Vatika, meeting her, and burning of Lanka.',
-    summary: 'The only Kand named after Hanuman (called \'Sundara\' by his mother). Hanuman leaps across the ocean overcoming obstacles, finds Sita, reassures her with Rama\'s ring, displays his massive form, gets captured, burns down Lanka, and returns with Sita\'s crest-jewel (Chudamani), giving hope to Rama.',
-    moral: 'Unflinching faith, intellectual brilliance, and single-minded focus can conquer the widest oceans.',
+    translation: "Hanuman's Devotion & Triumph",
+    description: `Hanuman's leap across the ocean, discovery of Sita in Ashoka Vatika, meeting her, and burning of Lanka.`,
+    summary: `Sundara Kand is the emotional and heroic core of the epic. Named "Sundara" (beautiful) after Hanuman's childhood nickname, it focuses on Hanuman's solo mission. Resolving to find Sita, Hanuman expands his body and leaps across the sea. He overcomes obstacles like Mainaka mountain, Surasa (the mother of serpents), and the demoness Simhika. Upon entering Lanka, he shrinks in size to search the city. Eventually, he finds Sita in the Ashok Vatika garden, surrounded by tormenting demonesses. She looks gaunt but remains firm in her devotion to Rama, rejecting Ravana's threats. Hanuman climbs a tree and sings Rama's praises to gain her trust, then drops Rama's signet ring. Overjoyed, Sita recognizes him as Rama's messenger. Hanuman offers to carry her back, but she refuses, stating that it is Rama's duty to defeat Ravana and rescue her honorably. Hanuman decides to test Lanka's defenses. He destroys the royal orchards, slays several demon warriors (including Ravana's son Aksha Kumar), and allows himself to be captured by Indrajit's Brahmastra to meet Ravana. In the court, Hanuman advises Ravana to return Sita and seek Rama's pardon. Enraged, Ravana orders Hanuman's tail to be set on fire. Hanuman escapes, leaps from rooftop to rooftop, and sets Lanka ablaze, sparing only Ashok Vatika. He plunges into the sea to extinguish his tail, bids farewell to Sita, receives her Chudamani (hair ornament) as a token of discovery, and flies back to Rama with the reassuring news: "Sita has been found."`,
+    moral: `Unflinching faith, intellectual brilliance, and single-minded focus can conquer the widest oceans.`,
     themeColor: 'from-blue-700 via-indigo-600 to-purple-800',
     bgImage: 'linear-gradient(to bottom, #1d4ed8, #4f46e5, #581c87)',
     keyEvents: [
-      'Hanuman\'s epic leap across the ocean',
-      'Overcoming Surasa and Simhika',
-      'Entry into Lanka and finding Sita in Ashoka Vatika',
-      'Exchanging Rama\'s signet ring and Chudamani',
-      'Destruction of Ashoka Vatika and killing of Aksha Kumar',
-      'Confrontation with Ravana and the burning of Lanka'
+      `Hanuman's epic leap across the ocean`,
+      `Overcoming Surasa and Simhika`,
+      `Entry into Lanka and finding Sita in Ashoka Vatika`,
+      `Exchanging Rama's signet ring and Chudamani`,
+      `Destruction of Ashoka Vatika and killing of Aksha Kumar`,
+      `Confrontation with Ravana and the burning of Lanka`
     ],
     verses: [
       {
         sanskrit: 'नमोऽस्तु रामाय सलक्ष्मणाय देव्यै च तस्यै जनकात्मजायै। नमोऽस्तु रुद्रेन्द्रयमानिलेभ्यो नमोऽस्तु चन्द्रार्कमरुद्गणेभ्यः॥',
-        transliteration: 'namo\'stu rāmāya salakṣmaṇāya devyai ca tasyai janakātmajāyai | namo\'stu rudrendrayamānilebhyo namo\'stu candrārkamarudgaṇebhyaḥ ||',
+        transliteration: "namo'stu rāmāya salakṣmaṇāya devyai ca tasyai janakātmajāyai | namo'stu rudrendrayamānilebhyo namo'stu candrārkamarudgaṇebhyaḥ ||",
         translation: 'Salutations to Rama along with Lakshmana, and to the divine daughter of Janaka (Sita). Salutations to Rudra, Indra, Yama, and Vayu. Salutations to Moon, Sun, and Maruts.',
         reference: 'Valmiki Ramayana, 5.13.59'
       }
     ],
     lessons: [
-      'Intellect & Grace: Balancing raw power with polite speech and strategic thinking.',
-      'Chastity and Resiliency: Sita resisting Ravana\'s temptations and threats.',
-      'Humility in Triumph: Hanuman attributing his success entirely to Lord Rama.'
+      `Intellect & Grace: Balancing raw power with polite speech and strategic thinking.`,
+      `Chastity and Resiliency: Sita resisting Ravana's temptations and threats.`,
+      `Humility in Triumph: Hanuman attributing his success entirely to Lord Rama.`
+    ],
+    themes: [
+      {
+        title: `Seva Dharma (Service)`,
+        description: `Hanuman represents the pinnacle of selfless service. He crosses the ocean, fights battles, and advises kings, yet attributes every success to Rama's grace rather than his own power.`
+      },
+      {
+        title: `The Trapped Soul`,
+        description: `Sita represents the Jivatma (individual soul) trapped in Lanka (the material body/world). Hanuman represents the Guru who brings the message of hope and the ring of wisdom from the Paramatma (Supreme Soul, Rama).`
+      },
+      {
+        title: `Mental Strength (Resilience)`,
+        description: `Sita's refusal to yield to Ravana's wealth and power illustrates the strength of character. Her resolve shows that inner dignity cannot be taken away by external circumstances.`
+      }
     ]
   },
   {
@@ -279,50 +356,64 @@ export const kands: Kand[] = [
     name: 'Yuddha Kand',
     title: 'The Book of War',
     translation: 'Bridge, Siege & Victory',
-    description: 'Building of Rama Setu, siege of Lanka, fierce battles, slaying of Ravana, and coronation of Rama.',
-    summary: 'The longest Kand. Rama\'s army builds a floating stone bridge (Rama Setu). Vibhishana seeks refuge with Rama. A colossal war ensues in Lanka. Rama slays Ravana, Sita is liberated and undergoes the Agni Pariksha to prove her purity, and they return to Ayodhya on the Pushpaka Vimana to a grand coronation.',
-    moral: 'Good inevitably triumphs over evil, but victory requires order, sacrifice, and absolute devotion to righteous conduct.',
+    description: `Building of Rama Setu, siege of Lanka, fierce battles, slaying of Ravana, and coronation of Rama.`,
+    summary: `Yuddha Kand is the longest and most dramatic book of the epic. It chronicles the siege of Lanka. Hearing Hanuman's report, Rama leads the Vanara army to the ocean. Vibhishana, advising his brother Ravana to return Sita, is kicked out of Lanka and seeks refuge with Rama. Rama welcomes him, declaring that he will protect anyone who surrenders. To cross the sea, the Vanaras build the Rama Setu, a bridge of floating stones, engineered by Nala and Nila. The army crosses and encamps outside Lanka. Rama sends Angada as a final peace envoy, but Ravana refuses to surrender, launching the war. A series of fierce battles ensue. Lakshmana is gravely wounded by Meghnad's Shakti arrow, but Hanuman flies to the Himalayas and brings back the entire Drona hill containing Sanjeevani herbs to save him. Lakshmana kills Meghnad, and Rama destroys the massive Kumbhakarna. Finally, Rama and Ravana meet in a final duel. Supported by Indra's chariot, Rama fights Ravana, ultimately slicing his heads repeatedly. Guided by Vibhishana, Rama shoots his arrow into Ravana's navel, destroying the demon king. Sita is freed, but to establish her purity to the world, she undergoes the Agni Pariksha, walking through fire unharmed. Vibhishana is crowned king of Lanka. The 14-year exile ends, and Rama, Sita, and Lakshmana return to Ayodhya on the Pushpaka Vimana. The citizens light thousands of clay lamps (marking the first Diwali) to welcome them, and Rama is crowned King, beginning the golden era of Ramrajya.`,
+    moral: `Good inevitably triumphs over evil, but victory requires order, sacrifice, and absolute devotion to righteous conduct.`,
     themeColor: 'from-red-800 via-rose-700 to-orange-600',
     bgImage: 'linear-gradient(to bottom, #991b1b, #be123c, #ea580c)',
     keyEvents: [
-      'Vibhishana\'s surrender and refuge',
-      'Building of the Rama Setu bridge',
-      'The siege of Lanka and emissary Angada\'s mission',
-      'Fierce battles: Lakshmana vs. Indrajit, Rama vs. Kumbhakarna',
-      'Slaying of Ravana by Lord Rama using Brahmastra',
-      'Sita\'s Agni Pariksha and return to Ayodhya on Pushpaka Vimana'
+      `Vibhishana's surrender and refuge`,
+      `Building of the Rama Setu bridge`,
+      `The siege of Lanka and emissary Angada's mission`,
+      `Fierce battles: Lakshmana vs. Indrajit, Rama vs. Kumbhakarna`,
+      `Slaying of Ravana by Lord Rama using Brahmastra`,
+      `Sita's Agni Pariksha and return to Ayodhya on Pushpaka Vimana`
     ],
     verses: [
       {
         sanskrit: 'सकृदेव प्रपन्नाय तवास्मीति च याचते। अभयं सर्वभूतेभ्यो ददाम्येतद्व्रतं मम॥',
-        transliteration: 'sakṛdeva prapannāya tavāsmīti ca yācate | abhayaṁ sarvabhūtebyo dadāmyetadvratam mama ||',
+        transliteration: "sakṛdeva prapannāya tavāsmीti ca yācate | abhayaṁ sarvabhūtebyo dadāmyetadvratam mama ||",
         translation: 'To anyone who surrenders to Me even once, saying "I am Yours" and seeking protection, I grant absolute fearlessness from all beings. This is My eternal vow.',
         reference: 'Valmiki Ramayana, 6.18.33'
       }
     ],
     lessons: [
-      'Compassion: Rama forgiving Vibhishana and Ravana at the moment of death.',
-      'Equality: Building the bridge with monkeys, squirrels, and kings working together.',
-      'Devotion to values: Protecting righteousness even at great personal cost.'
+      `Compassion: Rama forgiving Vibhishana and Ravana at the moment of death.`,
+      `Equality: Building the bridge with monkeys, squirrels, and kings working together.`,
+      `Devotion to values: Protecting righteousness even at great personal cost.`
+    ],
+    themes: [
+      {
+        title: `Triumph over Ego`,
+        description: `Ravana's ten heads represent the ten human vices (lust, anger, greed, ego, jealousy, pride, etc.). Slaying Ravana symbolizes the triumph of the higher self over the lower animal nature.`
+      },
+      {
+        title: `Unconditional Refuge (Sharanagati)`,
+        description: `Rama welcoming Vibhishana, despite him being the brother of his mortal enemy, establishes the principle of Sharanagati—that anyone who sincerely seeks shelter will be protected, regardless of background.`
+      },
+      {
+        title: `Cooperation & Faith`,
+        description: `Building the Rama Setu bridge represents collective effort. Monkeys, bears, and even a tiny squirrel contribute, showing that when a community works with faith, impossible barriers can be crossed.`
+      }
     ]
   },
   {
     id: 'uttara-kand',
     name: 'Uttara Kand',
-    title: 'The Last Book',
+    title: 'Uttara Kand',
     translation: 'Reign, Separation & Ascension',
-    description: 'Life after coronation, exile of Sita, birth of Luv and Kush, and Rama\'s final departure.',
-    summary: 'The concluding chapter. Rama rules Ayodhya. Due to gossip regarding her time in Lanka, Rama makes the painful choice to banish Sita. Sage Valmiki gives her refuge. She births twins Luv and Kush. After the boys recite the Ramayana at the palace, Sita returns to Mother Earth. Rama eventually ascends to his divine abode.',
-    moral: 'The path of a leader (Raja Dharma) is filled with immense personal sacrifice for collective order.',
+    description: `Life after coronation, exile of Sita, birth of Luv and Kush, and Rama's final departure.`,
+    summary: `Uttara Kand is the final, reflective book. Rama rules Ayodhya with absolute justice, creating an era of peace and prosperity. However, some citizens raise doubts about Sita's purity due to her long imprisonment in Lanka. Prioritizing his duty as a king (Raja Dharma) to maintain public trust and moral order above his personal happiness, Rama makes the painful decision to banish Sita. Lakshmana leaves her near the ashram of Sage Valmiki, where she is taken in. She gives birth to twin sons, Luv and Kush, who are raised in the forest, learning the holy scriptures and the art of warfare. Valmiki composes the Ramayana and teaches it to the young twins. Years later, Rama conducts an Ashvamedha Yajna. Luv and Kush arrive in Ayodhya, singing the verses of the Ramayana in the streets and the royal court, narrating Rama's life and Sita's sacrifices. Rama recognizes them as his sons. Sita is summoned to the court, but she decides her earthly mission is complete. She calls upon Mother Earth (Bhumidevi) to receive her, and the earth splits open, taking Sita in. Heartbroken, Rama decides to conclude his earthly manifestations. He divides the kingdom among his sons and brothers, walks into the sacred Sarayu River, and ascends back to his eternal cosmic form of Lord Vishnu, concluding the divine play.`,
+    moral: `The path of a leader (Raja Dharma) is filled with immense personal sacrifice for collective order.`,
     themeColor: 'from-slate-800 via-zinc-700 to-stone-900',
     bgImage: 'linear-gradient(to bottom, #1e293b, #3f3f46, #1c1917)',
     keyEvents: [
-      'The Golden Era of Rama\'s rule (Ramrajya)',
-      'Banishment of Sita to Sage Valmiki\'s ashram',
-      'Birth of Luv and Kush and learning of Ramayana',
-      'Luv and Kush reciting Ramayana before Rama',
-      'Sita\'s final return to Mother Earth (Bhumidevi)',
-      'Lord Rama\'s final ascension and departure from Sarayu'
+      `The Golden Era of Rama's rule (Ramrajya)`,
+      `Banishment of Sita to Sage Valmiki's ashram`,
+      `Birth of Luv and Kush and learning of Ramayana`,
+      `Luv and Kush reciting Ramayana before Rama`,
+      `Sita's final return to Mother Earth (Bhumidevi)`,
+      `Lord Rama's final ascension and departure from Sarayu`
     ],
     verses: [
       {
@@ -333,12 +424,27 @@ export const kands: Kand[] = [
       }
     ],
     lessons: [
-      'Sacrifice: Letting go of personal happiness to fulfill institutional duties.',
-      'Art as a Teacher: Luv and Kush using music and poetry to teach Ayodhya its own lessons.',
-      'Ascension: Realizing that physical life is temporary, and values are immortal.'
+      `Sacrifice: Letting go of personal happiness to fulfill institutional duties.`,
+      `Art as a Teacher: Luv and Kush using music and poetry to teach Ayodhya its own lessons.`,
+      `Ascension: Realizing that physical life is temporary, and values are immortal.`
+    ],
+    themes: [
+      {
+        title: `The Burden of Leadership`,
+        description: `Examines the sacrifices of public office. Rama banishing his beloved wife Sita shows that a ruler must sometimes place public trust and social unity above personal desires.`
+      },
+      {
+        title: `Earthly Disillusionment`,
+        description: `Sita returning to Mother Earth symbolizes the ultimate return of our elements. It shows that after fulfilling one's duties, one must gracefully detach from the material plane.`
+      },
+      {
+        title: `Legacy and Oral Tradition`,
+        description: `Luv and Kush singing the Ramayana before Rama shows the power of storytelling. The epic is not just history, but a living moral mirror that preserves righteousness across generations.`
+      }
     ]
   }
 ];
+
 
 export const characters: Character[] = [
   {
@@ -374,6 +480,7 @@ export const characters: Character[] = [
     ],
     allies: ['Lakshmana', 'Hanuman', 'Sita', 'Sugriva', 'Vibhishana', 'Jambavan'],
     enemies: ['Ravana', 'Kumbhakarna', 'Indrajit', 'Tataka', 'Khara'],
+    biography: `Lord Rama is the eighth avatar of Lord Vishnu, born as the eldest son of King Dasharatha and Queen Kausalya of Ayodhya. Known as Maryada Purushottama, he represents the pinnacle of righteousness, duty, and moral perfection. His life is an epic demonstration of adherence to Dharma under the most testing conditions. When banished to a 14-year forest exile on the eve of his coronation, Rama accepted the decree with serenity to protect his father's honor. In the forest, he protected sages, defeated legions of demons, and eventually fought a massive war in Lanka to rescue his abducted wife, Sita. Rama's rule, known as Ramrajya, remains the eternal benchmark of absolute justice, prosperity, and peace.`,
     aestheticColor: 'rgba(217, 119, 6, 0.15)' // gold aura
   },
   {
@@ -404,6 +511,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Lakshmana', 'Hanuman', 'Trijata'],
     enemies: ['Ravana', 'Surpanakha'],
+    biography: `Sita is the incarnation of Goddess Lakshmi, found in a furrow of a ploughed field by King Janaka of Mithila, who raised her as his daughter. She married Rama after he broke Lord Shiva's Pinaka bow. Sita represents the ultimate ideals of purity, resilience, and inner strength. She voluntarily accompanied Rama into exile, choosing the harsh forest over royal comforts. Even when abducted by Ravana and kept in captivity in Lanka's Ashok Vatika, she maintained absolute dignity, rejecting all temptations and threats. Her character illustrates that true strength is quiet and unyielding, and her final return to Mother Earth represents the ultimate return to natural purity.`,
     aestheticColor: 'rgba(16, 185, 129, 0.15)' // emerald green
   },
   {
@@ -432,6 +540,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Lakshmana', 'Sita', 'Sugriva', 'Angada', 'Jambavan'],
     enemies: ['Ravana', 'Indrajit', 'Simhika', 'Kalanemi'],
+    biography: `Hanuman is the monkey deity born of Anjana and Kesari, blessed by Vayu, the Wind God. He represents absolute devotion, selfless service, and unmatched physical and spiritual strength. In Kishkindha, he recognized Rama as his divine lord and dedicated his life to his service. Hanuman took a historic leap across the ocean to find Sita in Lanka, giving her hope and burning down the city of Lanka to challenge Ravana. During the war, he brought the Sanjeevani herb by lifting the entire Drona mountain to save Lakshmana's life. Despite his supernatural powers, Hanuman remains the embodiment of humility, attributing all his deeds to Rama's grace.`,
     aestheticColor: 'rgba(239, 68, 68, 0.15)' // crimson red glow
   },
   {
@@ -463,6 +572,7 @@ export const characters: Character[] = [
     ],
     allies: ['Kumbhakarna', 'Indrajit', 'Prahasta'],
     enemies: ['Rama', 'Lakshmana', 'Hanuman', 'Sugriva', 'Vibhishana'],
+    biography: `Ravana was the powerful demon king of Lanka. Born to the sage Vishrava and Kaikesi, he was an extraordinary scholar of the Vedas, a master musician of the Veena, and a supreme devotee of Lord Shiva. Having secured boons of invincibility from Lord Brahma, Ravana conquered the heavens and ruled Lanka with unmatched splendor. However, his high intellect was corrupted by intense ego, pride, and lust. His abduction of Sita led to his downfall. Despite warnings from his wise wife Mandodari and brother Vibhishana, Ravana chose the path of arrogance, leading to the destruction of his dynasty and his own death at the hands of Lord Rama.`,
     aestheticColor: 'rgba(99, 102, 241, 0.15)' // royal indigo/blue shadow
   },
   {
@@ -492,6 +602,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Sita', 'Hanuman', 'Sugriva'],
     enemies: ['Ravana', 'Indrajit', 'Surpanakha'],
+    biography: `Lakshmana is Rama's younger brother, born to Queen Sumitra. He is the incarnation of the cosmic serpent Adisesha, representing loyalty, protection, and tireless service. Lakshmana chose to accompany Rama and Sita into exile, staying awake for fourteen years to guard them. He represents fiery devotion and immediate action against injustice. Lakshmana fought valiantly in the war of Lanka, defeating Ravana's powerful son Indrajit (Meghnad) after surviving a near-fatal wound from the Shakti arrow.`,
     aestheticColor: 'rgba(242, 123, 33, 0.15)' // warm orange
   },
   {
@@ -520,6 +631,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Vashistha', 'Janaka', 'Jatayu'],
     enemies: ['Sambasura'],
+    biography: `Dasharatha was the King of Ayodhya and the ruler of the Kosala Kingdom, belonging to the Solar Dynasty. Known for his valor and administrative wisdom, he was a righteous king who loved his eldest son Rama deeply. However, his past promise of two boons to Queen Kaikeyi became his tragic undoing. When forced to choose between his beloved son and his truth, Dasharatha chose the path of truth, exiling Rama. He passed away from the sheer grief of separation, symbolizing the high cost of keeping one's commitments.`,
     aestheticColor: 'rgba(120, 110, 90, 0.15)' // stone gray
   },
   {
@@ -546,6 +658,7 @@ export const characters: Character[] = [
     ],
     allies: ['Manthara'],
     enemies: ['Rama', 'Lakshmana', 'Sita'],
+    biography: `Kaikeyi was the youngest queen of King Dasharatha and the princess of Kekeya. Originally a brave warrior queen who once saved Dasharatha's life on the battlefield, she loved Rama like her own son. However, her maid Manthara poisoned her mind, creating fear that Rama's coronation would lead to her and Bharata's exile. Influenced by this toxic counsel, Kaikeyi demanded the exiling of Rama and the crowning of Bharata, causing the king's death and receiving the eternal scorn of history, though she later deeply repented.`,
     aestheticColor: 'rgba(180, 50, 50, 0.15)' // crimson red shadow
   },
   {
@@ -574,6 +687,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Lakshmana', 'Shatrughna', 'Vashistha'],
     enemies: [],
+    biography: `Bharata is Rama's younger brother, born to Queen Kaikeyi. He is the epitome of sibling love, integrity, and absolute detachment. When he returned to Ayodhya and discovered his mother's role in Rama's exile, he rejected the throne and Kaikeyi. He walked to Chitrakoot to plead with Rama to return. When Rama refused, Bharata took Rama's wooden sandals (Padukas), placed them on the throne, and ruled Kosala as a humble servant and regent from a simple hut in Nandigram for fourteen years.`,
     aestheticColor: 'rgba(212, 175, 55, 0.12)' // gold-gray
   },
   {
@@ -602,6 +716,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Hanuman', 'Lakshmana'],
     enemies: ['Ravana', 'Indrajit', 'Kumbhakarna'],
+    biography: `Vibhishana is the younger brother of Ravana, born with a righteous temperament despite his Rakshasa lineage. He spent his life in Lanka advocating for moral conduct and pleaded with Ravana to return Sita to Rama. When Ravana humiliated and exiled him, Vibhishana sought refuge with Rama. Rama welcomed him unconditionally, crowning him the King of Lanka before the war even concluded. Vibhishana represents the ultimate lesson that righteousness (Dharma) transcends family ties and national identity.`,
     aestheticColor: 'rgba(5, 150, 105, 0.15)' // emerald green aura
   },
   {
@@ -628,6 +743,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Hanuman', 'Lakshmana', 'Angada', 'Jambavan'],
     enemies: ['Bali', 'Ravana'],
+    biography: `Sugriva was the monkey king of Kishkindha. Forced into exile by his powerful brother Bali, who had seized his kingdom and wife Ruma, Sugriva lived in fear on Rishyamukha Hill. Upon meeting Rama through Hanuman, he formed a sacred alliance. Rama helped him reclaim his kingdom by slaying Bali, and Sugriva mobilized the global Vanara forces to assist Rama in searching for Sita and defeating Ravana, demonstrating the power of alliance.`,
     aestheticColor: 'rgba(180, 130, 4, 0.15)' // amber
   },
   {
@@ -655,6 +771,7 @@ export const characters: Character[] = [
     ],
     allies: [],
     enemies: ['Sugriva', 'Dundubhi'],
+    biography: `Bali was the elder brother of Sugriva and the mighty ruler of Kishkindha. Possessing a divine boon that absorbed half the strength of any opponent who faced him directly, he was virtually invincible. However, his arrogance led him to unjustly exile his brother and keep Sugriva's wife. Rama slew him from concealment to fulfill his promise to Sugriva. In his final moments, Bali realized his moral errors, reconciled with Sugriva, and placed his son Angada in Rama's care.`,
     aestheticColor: 'rgba(100, 80, 50, 0.15)' // stone brown
   },
   {
@@ -680,6 +797,7 @@ export const characters: Character[] = [
     ],
     allies: ['Rama', 'Hanuman', 'Lakshmana', 'Sugriva'],
     enemies: ['Ravana'],
+    biography: `Jambavan is the wise king of the bears, created by Lord Brahma. Blessed with immense wisdom, longevity, and deep scriptural knowledge, he served as a primary counselor in the search for Sita. He played a critical role in reminding Hanuman of his divine heritage and dormant flying powers when the monkey army faced the impossible barrier of the southern ocean, serving as the ultimate mentor.`,
     aestheticColor: 'rgba(70, 70, 90, 0.15)' // deep gray
   },
   {
@@ -706,6 +824,7 @@ export const characters: Character[] = [
     ],
     allies: ['Ravana', 'Kumbhakarna'],
     enemies: ['Lakshmana', 'Hanuman', 'Rama'],
+    biography: `Indrajit, also known as Meghnad, was the eldest son of Ravana and the crown prince of Lanka. He was a master of dark illusionary magic, possessing rare weapons from Lord Brahma, Lord Vishnu, and Lord Shiva. He earned the name Indrajit by defeating Indra, the King of Heaven. He fought fiercely in the war, twice binding Rama and Lakshmana with magical arrows, but was eventually slain by Lakshmana in a high-stakes combat after his secret sacrificial rituals were disrupted.`,
     aestheticColor: 'rgba(88, 28, 135, 0.15)' // deep purple
   },
   {
@@ -733,6 +852,7 @@ export const characters: Character[] = [
     ],
     allies: ['Ravana', 'Indrajit'],
     enemies: ['Rama', 'Lakshmana', 'Hanuman'],
+    biography: `Kumbhakarna was the giant younger brother of Ravana. Possessing colossal strength, he was cursed to sleep for six months at a time due to a slip of tongue before Lord Brahma. When awakened during the war, he criticized Ravana's sinful abduction of Sita but chose to fight for his brother out of loyalty. He entered the battlefield, causing widespread havoc, before being slain by Lord Rama. He represents blind loyalty to family over universal moral values.`,
     aestheticColor: 'rgba(30, 41, 59, 0.18)' // slate gray
   }
 ];
@@ -742,90 +862,150 @@ export const timelineEvents: TimelineEvent[] = [
     id: 'birth-of-rama',
     title: 'Birth of Rama',
     period: 'Treta Yuga',
-    description: 'Lord Vishnu manifests on earth as the eldest son of King Dasharatha of Ayodhya to defeat Ravana and establish Dharma.',
+    description: `Lord Vishnu manifests on earth as the eldest son of King Dasharatha of Ayodhya to defeat Ravana and establish Dharma.`,
     location: 'Ayodhya',
     characters: ['Rama', 'Dasharatha', 'Kausalya'],
-    lesson: 'The divine responds to sincere prayers and sacrifices.',
+    lesson: `The divine responds to sincere prayers and sacrifices.`,
     source: 'Valmiki Ramayana, Bal Kand, Sarga 18'
+  },
+  {
+    id: 'hermitage-protection',
+    title: 'Hermitage Protection',
+    period: 'Early Youth',
+    description: `The young princes Rama and Lakshmana accompany Sage Vishwamitra to the forest, protecting his yajna and slaying the demoness Tataka.`,
+    location: 'Siddhashrama',
+    characters: ['Rama', 'Lakshmana', 'Vishwamitra', 'Tataka'],
+    lesson: `Duty to protect spiritual endeavors starts at a young age.`,
+    source: 'Valmiki Ramayana, Bal Kand, Sarga 30'
   },
   {
     id: 'sita-swayamvar',
     title: 'Sita Swayamvar',
     period: 'Early Youth',
-    description: 'Rama lifts, strings, and breaks the heavy Pinaka bow of Lord Shiva, winning the hand of Sita in marriage.',
+    description: `Rama lifts, strings, and breaks the heavy Pinaka bow of Lord Shiva in Mithila, winning the hand of Sita in marriage.`,
     location: 'Mithila',
     characters: ['Rama', 'Sita', 'Janaka', 'Vishwamitra', 'Lakshmana'],
-    lesson: 'Destiny matches those of equal virtue and caliber.',
+    lesson: `Destiny matches those of equal virtue and caliber.`,
     source: 'Valmiki Ramayana, Bal Kand, Sarga 67'
   },
   {
     id: 'exile-of-rama',
     title: 'The Banishing Command',
     period: 'Day of Coronation',
-    description: 'Rama is exiled for 14 years to keep the promises of King Dasharatha to Queen Kaikeyi.',
+    description: `Rama is exiled for 14 years to keep the promises of King Dasharatha to Queen Kaikeyi. Sita and Lakshmana voluntarily accompany him.`,
     location: 'Ayodhya',
     characters: ['Rama', 'Sita', 'Lakshmana', 'Dasharatha', 'Kaikeyi'],
-    lesson: 'Honoring commitments is the bedrock of absolute truth.',
+    lesson: `Honoring commitments is the bedrock of absolute truth.`,
     source: 'Valmiki Ramayana, Ayodhya Kand, Sarga 19'
   },
   {
-    id: 'golden-deer',
-    title: 'The Illusion of Maricha',
+    id: 'crossing-ganges',
+    title: 'Crossing the Ganges',
+    period: '1st Year of Exile',
+    description: `Rama, Sita, and Lakshmana cross the holy Ganges river with the help of the loyal boatman Guha, entering the deep forest.`,
+    location: 'Sringaverapur',
+    characters: ['Rama', 'Sita', 'Lakshmana', 'Guha'],
+    lesson: `True devotion knows no social barriers.`,
+    source: 'Valmiki Ramayana, Ayodhya Kand, Sarga 52'
+  },
+  {
+    id: 'life-at-panchavati',
+    title: 'Settling at Panchavati',
+    period: 'Exile Years',
+    description: `They establish a peaceful hermitage on the banks of the Godavari River, meeting sages and living in harmony with nature.`,
+    location: 'Panchavati',
+    characters: ['Rama', 'Sita', 'Lakshmana'],
+    lesson: `Inner peace can be cultivated in the simplest of surroundings.`,
+    source: 'Valmiki Ramayana, Aranya Kand, Sarga 15'
+  },
+  {
+    id: 'surpanakha-mutilation',
+    title: "Surpanakha's Confrontation",
     period: '13th Year of Exile',
-    description: 'Ravana plots the golden deer illusion. Rama runs after the deer, and Sita is left unprotected.',
+    description: `Ravana's sister Surpanakha attempts to attack Sita and is mutilated by Lakshmana, triggering Ravana's plot for revenge.`,
+    location: 'Panchavati',
+    characters: ['Lakshmana', 'Sita', 'Surpanakha', 'Rama'],
+    lesson: `Lust and unchecked aggression lead to immediate downfall.`,
+    source: 'Valmiki Ramayana, Aranya Kand, Sarga 18'
+  },
+  {
+    id: 'golden-deer',
+    title: 'The Golden Deer',
+    period: '13th Year of Exile',
+    description: `Ravana plots the golden deer illusion. Rama runs after the deer, and Sita is left unprotected.`,
     location: 'Panchavati',
     characters: ['Rama', 'Sita', 'Lakshmana', 'Maricha'],
-    lesson: 'Illusionary desires lead to distraction and separation.',
+    lesson: `Illusionary desires lead to distraction and separation.`,
     source: 'Valmiki Ramayana, Aranya Kand, Sarga 43'
   },
   {
     id: 'abduction-of-sita',
-    title: 'Sita\'s Abduction',
+    title: "Sita's Abduction",
     period: '13th Year of Exile',
-    description: 'Ravana kidnaps Sita. Jatayu fights Ravana to save her, sacrificing his life.',
+    description: `Ravana kidnaps Sita. Jatayu fights Ravana to save her, sacrificing his life. Sita is imprisoned in Ashok Vatika.`,
     location: 'Dandakaranya Forest',
     characters: ['Sita', 'Ravana', 'Jatayu'],
-    lesson: 'Courage is fighting for justice even when defeat is certain.',
+    lesson: `Courage is fighting for justice even when defeat is certain.`,
     source: 'Valmiki Ramayana, Aranya Kand, Sarga 49'
   },
   {
-    id: 'hanumans-leap',
-    title: 'Hanuman\'s Giant Leap',
+    id: 'sugriva-alliance',
+    title: 'Alliance with Sugriva',
     period: '14th Year of Exile',
-    description: 'Hanuman leaps across the 100-yojana ocean to Lanka to locate Sita.',
+    description: `Rama meets Hanuman, helps Sugriva regain the throne of Kishkindha by slaying Bali, and forms a grand alliance.`,
+    location: 'Kishkindha',
+    characters: ['Rama', 'Lakshmana', 'Sugriva', 'Hanuman', 'Bali'],
+    lesson: `Righteous alliance yields mutual strength and success.`,
+    source: 'Valmiki Ramayana, Kishkindha Kand, Sarga 12'
+  },
+  {
+    id: 'hanumans-leap',
+    title: "Hanuman's Giant Leap",
+    period: '14th Year of Exile',
+    description: `Hanuman leaps across the 100-yojana ocean to Lanka to locate Sita, giving her Rama's ring and burning down Lanka.`,
     location: 'Mahendra Mountain to Lanka',
-    characters: ['Hanuman'],
-    lesson: 'True devotion unlocks boundless potential within oneself.',
+    characters: ['Hanuman', 'Sita', 'Ravana'],
+    lesson: `True devotion unlocks boundless potential within oneself.`,
     source: 'Valmiki Ramayana, Sundara Kand, Sarga 1'
   },
   {
     id: 'bridge-to-lanka',
     title: 'Construction of Rama Setu',
     period: 'Battle Eve',
-    description: 'The Vanara army builds a floating stone bridge across the ocean to reach Lanka.',
+    description: `The Vanara army builds a floating stone bridge across the ocean to reach Lanka, engineered by Nala and Nila.`,
     location: 'Rameshwaram',
     characters: ['Rama', 'Lakshmana', 'Sugriva', 'Nala', 'Nila'],
-    lesson: 'Collective effort and simple faith can build bridges over impossible waters.',
+    lesson: `Collective effort and simple faith can build bridges over impossible waters.`,
     source: 'Valmiki Ramayana, Yuddha Kand, Sarga 22'
   },
   {
-    id: 'battle-of-lanka',
-    title: 'The Great War & Victory',
-    period: 'End of 14th Year',
-    description: 'Rama defeats Ravana, crowning Vibhishana as the new king of Lanka.',
+    id: 'slaying-indrajit',
+    title: 'Slaying of Kumbhakarna & Meghnad',
+    period: 'War of Lanka',
+    description: `The war begins. Lakshmana slays Ravana's powerful son Indrajit, and Rama slays Ravana's giant brother Kumbhakarna.`,
     location: 'Lanka',
-    characters: ['Rama', 'Ravana', 'Lakshmana', 'Hanuman', 'Vibhishana'],
-    lesson: 'Pride and ego are eventually conquered by truth and humility.',
+    characters: ['Rama', 'Lakshmana', 'Indrajit', 'Kumbhakarna', 'Hanuman'],
+    lesson: `Dark forces and magic are dismantled by discipline and devotion.`,
+    source: 'Valmiki Ramayana, Yuddha Kand, Sarga 67 & 89'
+  },
+  {
+    id: 'final-battle',
+    title: 'The Final Battle',
+    period: 'War of Lanka',
+    description: `Rama meets Ravana in a colossal duel, destroying the ten-headed demon king with the divine Brahmastra.`,
+    location: 'Lanka',
+    characters: ['Rama', 'Ravana', 'Vibhishana'],
+    lesson: `Truth and humility inevitably defeat pride and tyranny.`,
     source: 'Valmiki Ramayana, Yuddha Kand, Sarga 108'
   },
   {
     id: 'coronation-of-rama',
     title: 'Coronation of Rama',
     period: 'Return to Ayodhya',
-    description: 'Rama returns on the Pushpaka Vimana to Ayodhya, establishing the golden era of Ramrajya.',
+    description: `Rama returns on the Pushpaka Vimana to Ayodhya, establishing the golden era of Ramrajya.`,
     location: 'Ayodhya',
     characters: ['Rama', 'Sita', 'Lakshmana', 'Bharata', 'Hanuman'],
-    lesson: 'A righteous ruler places the welfare of the people above personal desires.',
+    lesson: `A righteous ruler places the welfare of the people above personal desires.`,
     source: 'Valmiki Ramayana, Yuddha Kand, Sarga 128'
   }
 ];
