@@ -1209,16 +1209,32 @@ export function getTranslatedQuizzes(lang: Language): Quiz[] {
 // ----------------------------------------------------
 // NATIVE TEXT-TO-SPEECH (TTS) AUDIO GUIDE
 // ----------------------------------------------------
-export function speakText(text: string, lang: Language) {
+let activeUtterance: any = null;
+
+export function speakText(text: string, lang: Language, onEnd?: () => void, onError?: () => void) {
   if (typeof window === 'undefined' || !window.speechSynthesis) return;
 
-  // Cancel any active speech synthesis
+  // Crucial Chrome Workaround: Resume before cancel to clear any frozen queue state
+  window.speechSynthesis.resume();
   window.speechSynthesis.cancel();
 
-  // Create new utterance
+  // Create new utterance and assign to module-level variable to prevent GC
   const utterance = new SpeechSynthesisUtterance(text);
+  activeUtterance = utterance;
+
   utterance.lang = lang === 'Hindi' ? 'hi-IN' : 'en-US';
   utterance.rate = lang === 'Hindi' ? 0.88 : 0.95; // slightly slower for better temple ambiance clarity
+
+  utterance.onend = () => {
+    activeUtterance = null;
+    if (onEnd) onEnd();
+  };
+
+  utterance.onerror = (event) => {
+    console.error("Speech synthesis error:", event);
+    activeUtterance = null;
+    if (onError) onError();
+  };
 
   // Fetch native system voices
   const voices = window.speechSynthesis.getVoices();

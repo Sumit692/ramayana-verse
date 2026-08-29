@@ -49,7 +49,12 @@ export default function Timeline() {
       return;
     }
     const textToRead = `${evt.title}. ${evt.description}. ${getTranslation('moral', language)}: ${evt.lesson}`;
-    speakText(textToRead, language);
+    speakText(
+      textToRead,
+      language,
+      () => setIsSpeaking(false),
+      () => setIsSpeaking(false)
+    );
     setIsSpeaking(true);
   };
 

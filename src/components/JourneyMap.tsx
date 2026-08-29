@@ -54,7 +54,12 @@ export default function JourneyMap() {
       return;
     }
     const textToRead = `${loc.name}. ${loc.description}. ${language === 'Hindi' ? 'इतिहास' : 'History'}: ${loc.history}. ${language === 'Hindi' ? 'आध्यात्मिक महत्व' : 'Spiritual Significance'}: ${loc.spiritualSignificance}`;
-    speakText(textToRead, language);
+    speakText(
+      textToRead,
+      language,
+      () => setIsSpeaking(false),
+      () => setIsSpeaking(false)
+    );
     setIsSpeaking(true);
   };
 

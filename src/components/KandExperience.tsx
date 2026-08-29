@@ -76,14 +76,14 @@ export default function KandExperience() {
 
     const textToRead = getKandSummary(currentKand) + `. ${language === 'Hindi' ? 'इस अध्याय की नैतिक सीख' : 'Moral of this chapter'}: ${currentKand.moral}`;
     
-    // Call centralized speakText utility
-    speakText(textToRead, language);
+    // Call centralized speakText utility with proper lifecycle state updates
+    speakText(
+      textToRead,
+      language,
+      () => setIsSpeaking(false),
+      () => setIsSpeaking(false)
+    );
     setIsSpeaking(true);
-    
-    // Fallback timer to reset the state if speech ends without firing onend in some browsers
-    setTimeout(() => {
-      setIsSpeaking(false);
-    }, 28000);
   };
 
   // Cancel speaking on Kand swap
