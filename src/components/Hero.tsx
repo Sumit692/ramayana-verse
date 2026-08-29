@@ -374,14 +374,6 @@ export default function Hero({ onBeginJourney }: HeroProps) {
               )}
             </AnimatePresence>
           </div>
-          
-          {/* Enter Game Button in Navbar */}
-          <a
-            href="/game"
-            className="px-4 py-2 rounded-full bg-gradient-to-r from-gold to-saffron text-black text-xs font-bold uppercase tracking-wider hover:scale-105 transition duration-300 cursor-pointer shadow-md"
-          >
-            {getTranslation('navGame', language)}
-          </a>
         </div>
       </header>
 
